@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { connect } from 'react-redux'
 import { userFetchStart, fetchUserPageCountStart, moreUserLoadStart } from './redux/users/users.actions'
