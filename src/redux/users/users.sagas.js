@@ -1,6 +1,6 @@
 import userActions from "./users.types";
 import { takeLatest, call, put, all, select, delay } from 'redux-saga/effects'
-import { selectUserPageNumber, selectUserTotalPageNumber, selectUserHavingData } from './users.selectors'
+import { selectUserPageNumber, selectUserTotalPageNumber } from './users.selectors'
 import { userFetchSuccess, userFetchFailure, fetchUserPageCountSuccess, fetchUserPageCountFailure, increasePageNumber, moreUserLoadSuccess, moreUserLoadFailure, allUsersFetched } from './users.actions'
 import axios from 'axios'
 
@@ -35,11 +35,10 @@ export function* loadMoreDataAsync() {
 
         const pageNumber = yield select(selectUserPageNumber)
         const totalPages = yield select(selectUserTotalPageNumber)
-        console.log(`Page Number -> ${pageNumber}  Total Page Number -> ${totalPages}`)
+
         if (pageNumber > totalPages) {
             yield put(allUsersFetched())
-            const isHaving = yield select(selectUserHavingData)
-            console.log(`Is Having -> ${isHaving}`)
+
         }
         else {
             const response = yield axios.get(`https://reqres.in/api/users?page=${pageNumber}`)
